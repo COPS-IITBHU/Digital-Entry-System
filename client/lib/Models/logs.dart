@@ -3,12 +3,13 @@ class Log {
   final String date;
   final String time;
   final String location;
-
+  final int studentId;
   Log({
     required this.id,
     required this.date,
     required this.time,
     required this.location,
+    required this.studentId,
   });
 
   factory Log.fromJson(Map<String, dynamic> json) {
@@ -17,6 +18,7 @@ class Log {
       date: json['date'],
       time: json['time'],
       location: json['location'],
+      studentId: json['studentId'],
     );
   }
 
@@ -26,6 +28,7 @@ class Log {
       'date': date,
       'time': time,
       'location': location,
+      'studentId': studentId,
     };
   }
 }
