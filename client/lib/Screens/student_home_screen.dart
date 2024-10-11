@@ -1,4 +1,5 @@
 import 'package:client/Models/logs.dart';
+import 'package:client/Widgets/qr_generation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -32,66 +33,81 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
           parseDateTime(b['date']! as String, b['time']! as String);
       return dateB!.compareTo(dateA!);
     });
-    // date and time ke hisab se sort kar raha hai
+    // date and time ke hisIab se sort kar raha hai
 
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        appBar: AppBar(
+            title: const Text('Digital-Entry'),
+            backgroundColor: Colors.purple,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.menu,
+              ),
+              onPressed: () {},
+            )),
+        body: Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
-              const Text(
-                'Generate',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+              Container(
+                width: double.infinity,
+                height: 200,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 195, 176, 176),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      spreadRadius: 1,
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Press Generate to generate the QR',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                ),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {},
-                //TODO: Add the logic to generate the QR with the iamge in assets at the center.
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                ),
-                child: const Text('Generated'),
-              ),
-              const SizedBox(height: 20),
-              // Central image section
-              Expanded(
-                flex: 1,
-                child: Row(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: Container(
-                        color: Colors.grey.shade300,
-                        child: const Icon(
-                          Icons.person,
-                          size: 100,
-                          color: Colors.black54,
-                        ),
+                    const Text(
+                      'Generate',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                    const Expanded(child: Placeholder()
-                        //TODO: Replace Placeholder with image of the id of student.
-                        )
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Press Generate to generate the QR',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        const QrGeneration();
+                      },
+                      //TODO: Add the logic to generate the QR with the iamge in assets at the center.
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.purple,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 12),
+                      ),
+                      child: const Text('Generate',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 0, 0, 0))),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               ),
+              // Central image section
+              const Expanded(child: Placeholder()),
+              //TODO: Add the ID of the student here;
               const SizedBox(height: 20),
               // Student logs section
               Container(

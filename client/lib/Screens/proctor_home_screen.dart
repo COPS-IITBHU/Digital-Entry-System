@@ -37,63 +37,76 @@ class ProctorHomeScreenState extends State<ProctorHomeScreen> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        appBar: AppBar(
+            title: const Text('Digital-Entry'),
+            backgroundColor: Colors.purple,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.menu,
+              ),
+              onPressed: () {},
+            )),
+        body: Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
-              const Text(
-                'Scan',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+              Container(
+                width: double.infinity,
+                height: 200,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 195, 176, 176),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      spreadRadius: 1,
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Press scan to scan the QR',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                ),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {},
-                //TODO: Add the logic to open a scanner for the QR.
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                ),
-                child: const Text('Scan'),
-              ),
-              const SizedBox(height: 20),
-              // Central image section
-              Expanded(
-                flex: 1,
-                child: Row(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: Container(
-                        color: Colors.grey.shade300,
-                        child: const Icon(
-                          Icons.person,
-                          size: 100,
-                          color: Colors.black54,
-                        ),
+                    const Text(
+                      'Scan QR',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                    const Expanded(child: Placeholder()
-                        //TODO: Replace Placeholder with image of the id of proctor.
-                        )
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Press Scan to Scan the QR',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {},
+                      //TODO: Add the logic to Scan the QR .
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.purple,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 12),
+                      ),
+                      child: const Text('Scan',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 0, 0, 0))),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               ),
+              // Central image section
+              const Expanded(child: Placeholder()),
+              //TODO: Add the ID of the proctor here;
               const SizedBox(height: 20),
-              // General logs section
+              // Student logs section
               Container(
                 alignment: Alignment.centerLeft,
                 child: const Text(

@@ -46,22 +46,24 @@ class LogScreenState extends State<LogScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          FutureBuilder(
-            future: studentLogs(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return const Text('Error');
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            FutureBuilder(
+              future: studentLogs(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  }
+                  return const Placeholder();
+                } else {
+                  return const CircularProgressIndicator();
                 }
-                return const Placeholder();
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
-          ),
-        ],
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
