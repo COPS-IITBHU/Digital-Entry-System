@@ -86,7 +86,14 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
                     const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
-                        const QrGeneration();
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const QrGeneration(),
+                            ),
+                          );
+                        });
                       },
                       //TODO: Add the logic to generate the QR with the iamge in assets at the center.
                       style: ElevatedButton.styleFrom(

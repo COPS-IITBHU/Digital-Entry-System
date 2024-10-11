@@ -1,5 +1,4 @@
 import 'package:client/Screens/proctor_home_screen.dart';
-import 'package:client/Screens/signup.dart';
 import 'package:client/Screens/student_home_screen.dart';
 import 'package:flutter/material.dart';
 

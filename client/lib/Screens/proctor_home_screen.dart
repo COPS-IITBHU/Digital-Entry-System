@@ -1,4 +1,5 @@
 import 'package:client/Models/logs.dart';
+import 'package:client/Widgets/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -84,7 +85,16 @@ class ProctorHomeScreenState extends State<ProctorHomeScreen> {
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const QrScanner(),
+                            ),
+                          );
+                        });
+                      },
                       //TODO: Add the logic to Scan the QR .
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purple,
