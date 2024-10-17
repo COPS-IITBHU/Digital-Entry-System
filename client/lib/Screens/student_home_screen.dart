@@ -1,5 +1,7 @@
 import 'package:client/Models/logs.dart';
+import 'package:client/Screens/student_profile.dart';
 import 'package:client/Widgets/qr_generation.dart';
+import 'package:client/main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -39,14 +41,33 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-            title: const Text('Digital-Entry'),
-            backgroundColor: Colors.purple,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.menu,
-              ),
-              onPressed: () {},
-            )),
+          title: const Text('Digital-Entry'),
+          backgroundColor: Colors.purple,
+          leading: IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              // Navigate to Profile Screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => StudentProfilePage(
+                      student:
+                          dummyUser), // Replace with your ProfileScreen widget
+                ),
+              );
+            },
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              color: Color.fromARGB(255, 0, 0, 0),
+              onPressed: () {
+                // Implement logout logic here
+                // For example, clear user session and navigate to login screen
+              },
+            ),
+          ],
+        ),
         body: Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

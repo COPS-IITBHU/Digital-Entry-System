@@ -15,7 +15,8 @@ class LogScreenState extends State<LogScreen> {
   Student student = Student(
     id: 0,
     name: '',
-    age: 0,
+    email: '',
+    dob: DateTime.now(),
     department: '',
     course: '',
     year: 0,
@@ -42,7 +43,8 @@ class LogScreenState extends State<LogScreen> {
       throw Exception('Failed to load logs');
     }
   }
- //TODO: Implement the proper getter for the student logs
+
+  //TODO: Implement the proper getter for the student logs
   @override
   Widget build(BuildContext context) {
     return Center(
