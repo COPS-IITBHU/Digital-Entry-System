@@ -1,19 +1,21 @@
 import "package:client/Models/logs.dart";
 class Student {
-  final int id;
-  final String name;
-  final int age;
-  final String department;
-  final String course;
-  final int year;
-  final List<Log> logs;
-  final List<String> vehicles;
-  final String imageUrl;
+ int id;
+ String name;
+ String email;
+ DateTime dob;
+ String department;
+ String course;
+ int year;
+ List<Log> logs;
+ List<String> vehicles;
+ String imageUrl;
 
   Student({
     required this.id,
     required this.name,
-    required this.age,
+    required this.email,
+    required this.dob,
     required this.department,
     required this.course,
     required this.year,
@@ -31,7 +33,8 @@ class Student {
     return Student(
       id: json['id'],
       name: json['name'],
-      age: json['age'],
+      email: json['email'],
+      dob: json['dob'],
       department: json['Department'],
       course: json['Course'],
       year: json['Year'],
@@ -45,7 +48,8 @@ class Student {
     return {
       'id': id,
       'name': name,
-      'age': age,
+      'email':email,
+      'dob': dob,
       'Department': department,
       'Course': course,
       'Year': year,
