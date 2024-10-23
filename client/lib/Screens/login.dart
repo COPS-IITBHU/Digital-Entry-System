@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple, // Google-like red button
+                    backgroundColor: Colors.purple, 
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -125,7 +125,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: isPassword, // To hide password input
+      obscureText: isPassword, 
       decoration: InputDecoration(
         labelText: label,
         filled: true,

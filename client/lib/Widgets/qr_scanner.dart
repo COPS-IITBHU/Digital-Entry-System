@@ -1,3 +1,5 @@
+import 'package:client/Models/student.dart';
+import 'package:client/Screens/student_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -10,6 +12,7 @@ class QrScanner extends StatefulWidget {
 }
 
 class _QrScannerState extends State<QrScanner> {
+  late Student student;
   String qrResult = 'Not Yet Scanned';
   Future<void> scanQrCode() async {
     try {
@@ -20,8 +23,9 @@ class _QrScannerState extends State<QrScanner> {
       }
       setState(() {
         qrResult = result.toString();
-        //TODO: QR ke result ko string ki jagah vo student profile ki tarah show karna hai
+        //TODO: Fetch the student and initialize the student object
       });
+      Navigator.push(context, MaterialPageRoute(builder: (context) => StudentProfilePage(student: student)));
     } on PlatformException {
       qrResult = 'Failed to get platform version.';
     }
@@ -29,12 +33,18 @@ class _QrScannerState extends State<QrScanner> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Scan a QR Code', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),),
+            const Text(
+              'Scan a QR Code',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
             Text(qrResult),
           ],
         ),
@@ -43,7 +53,6 @@ class _QrScannerState extends State<QrScanner> {
         onPressed: scanQrCode,
         child: const Icon(Icons.qr_code_scanner),
       ),
-      
     );
   }
 }

@@ -60,7 +60,7 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),
-              color: Color.fromARGB(255, 0, 0, 0),
+              color: const Color.fromARGB(255, 0, 0, 0),
               onPressed: () {
                 // Implement logout logic here
                 // For example, clear user session and navigate to login screen
@@ -116,7 +116,6 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
                           );
                         });
                       },
-                      //TODO: Add the logic to generate the QR with the iamge in assets at the center.
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purple,
                         padding: const EdgeInsets.symmetric(
@@ -134,8 +133,14 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
                 ),
               ),
               // Central image section
-              const Expanded(child: Placeholder()),
-              //TODO: Add the ID of the student here;
+              Expanded(
+                child: SizedBox(
+                  width: MediaQuery.sizeOf(context).width,
+                  height: MediaQuery.sizeOf(context).width * 0.67,
+                  child: Expanded(child: Image.network(dummyUser.imageUrl)),
+                ),
+              ),
+              //TODO: Replace dummy student with real.
               const SizedBox(height: 20),
               // Student logs section
               Container(

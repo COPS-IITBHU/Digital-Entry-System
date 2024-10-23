@@ -1,5 +1,6 @@
+import 'package:client/Models/proctor_profile.dart';
 import 'package:client/Models/student.dart';
-import 'package:client/Screens/login.dart';
+import 'package:client/Screens/proctor_home_screen.dart';
 import 'package:client/Screens/proctor_location_input.dart';
 import 'package:client/Screens/student_home_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,14 @@ final Student dummyUser = Student(
   vehicles: ['Bicycle', 'Scooter - MP09DE1234'],
   imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSixEKfEcJhD3fau0Pr-zDTEXgn9r9V3pqa4g&s", // random image picked for now...
+);
+Proctor dummyProctor = Proctor(
+  name: 'John Doe',
+  email: '',
+  phone: '',
+  id: 1,
+  logs: [],
+  imgURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSixEKfEcJhD3fau0Pr-zDTEXgn9r9V3pqa4g&s",
 );
 
 class MyApp extends StatelessWidget {
@@ -50,7 +59,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ProctorLocationInput(),
+      home: const ProctorHomeScreen(),
     );
   }
 }
