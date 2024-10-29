@@ -3,15 +3,14 @@ import 'package:client/Models/student.dart';
 import 'package:client/main.dart';
 
 class ProctorLocationInput extends StatefulWidget {
-  const ProctorLocationInput({super.key});
+  final Student student;
+  const ProctorLocationInput({super.key, required this.student} );
 
   @override
   State<ProctorLocationInput> createState() => _ProctorLocationInputState();
 }
 
 class _ProctorLocationInputState extends State<ProctorLocationInput> {
-  Student student = dummyUser; // TODO: Change to the actual student
-
   final List<String> _rajputanaEntries = [];
   final Map<int, List<String>> _locationDetails = {};
 

@@ -79,7 +79,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // Google login button
+
                 ElevatedButton.icon(
                   onPressed: () {
                     // TODO: Implement Google Sign-In logic

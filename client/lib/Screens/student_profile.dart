@@ -1,5 +1,6 @@
 import 'package:client/Models/student.dart';
 import 'package:client/Screens/edit_student_profile.dart';
+import 'package:client/Screens/proctor_location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -11,8 +12,6 @@ class StudentProfilePage extends StatefulWidget {
 }
 
 class _StudentProfilePageState extends State<StudentProfilePage> {
-  // Dummy student for testing purposes
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,57 +21,74 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile Picture and Name
-            Center(
-              child: Column(
-                children: [
-                  Image.network(
-                    widget.student.imageUrl,
-                    fit: BoxFit
-                        .cover, // This will make the image cover the entire container
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  (loadingProgress.expectedTotalBytes ?? 1)
-                              : null,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Profile Picture and Name
+              Center(
+                child: Column(
+                  children: [
+                    Image.network(
+                      widget.student.imageUrl,
+                      fit: BoxFit
+                          .cover, // This will make the image cover the entire container
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                          ),
+                        );
+                      },
+                      errorBuilder: (BuildContext context, Object error,
+                          StackTrace? stackTrace) {
+                        return const Center(
+                            child: Icon(Icons.error)); // Handle error case
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      widget.student.name,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
+          
+              // Student Details
+              _buildInfoRow('Date Of Birth',
+                  DateFormat('dd-MM-yyyy').format(widget.student.dob)),
+              _buildInfoRow('Department', widget.student.department.toString()),
+              _buildInfoRow('Course', widget.student.course.toString()),
+              _buildInfoRow('Year', 'Year ${widget.student.year.toString()}'),
+              _buildInfoRow('Vehicles', widget.student.vehicles.join(', ')),
+              _buildVehiclesList(),
+              Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProctorLocationInput(
+                            student: widget.student,
+                          ),
                         ),
                       );
                     },
-                    errorBuilder: (BuildContext context, Object error,
-                        StackTrace? stackTrace) {
-                      return const Center(
-                          child: Icon(Icons.error)); // Handle error case
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    widget.student.name,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+                    child: const Text('Enter The Location')),
               ),
-            ),
-            const SizedBox(height: 32),
-
-            // Student Details
-            _buildInfoRow('Date Of Birth',
-                DateFormat('dd-MM-yyyy').format(widget.student.dob)),
-            _buildInfoRow('Department', widget.student.department.toString()),
-            _buildInfoRow('Course', widget.student.course.toString()),
-            _buildInfoRow('Year', 'Year ${widget.student.year.toString()}'),
-            // _buildInfoRow('Vehicles', widget.student.vehicles.join(', ')),
-            _buildVehiclesList()
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -139,8 +155,10 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                   itemCount: widget.student.vehicles.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: const EdgeInsets.all(8.0), // Space around the tile
-                      padding: const EdgeInsets.all(16.0), // Space inside the tile
+                      margin:
+                          const EdgeInsets.all(8.0), // Space around the tile
+                      padding:
+                          const EdgeInsets.all(16.0), // Space inside the tile
                       decoration: BoxDecoration(
                         color: Colors.white, // Background color
                         borderRadius:

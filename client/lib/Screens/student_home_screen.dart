@@ -1,42 +1,21 @@
 import 'package:client/Models/logs.dart';
+import 'package:client/Models/student.dart';
 import 'package:client/Screens/student_profile.dart';
 import 'package:client/Widgets/qr_generation.dart';
-import 'package:client/main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StudentHomeScreen extends StatefulWidget {
-  const StudentHomeScreen({super.key});
+  Student student;
+  StudentHomeScreen({super.key, required this.student});
 
   @override
   State<StudentHomeScreen> createState() => StudentHomeScreenState();
 }
 
 class StudentHomeScreenState extends State<StudentHomeScreen> {
-  List<Log> logs = [];
-  Future<List<Log>> studentLogs() async {
-    // TODO: Implement the logic to fetch logs of the specific student logged in right now.
-    return logs;
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<Map<String, Object>> sortedLogs = logs
-        .map((log) => {
-              'date': log.date,
-              'time': log.time,
-              'location': log.location,
-              'id': log.id,
-            })
-        .toList();
-    sortedLogs.sort((a, b) {
-      DateTime? dateA = parseDateTime(a['date'] as String, a['time'] as String);
-      DateTime? dateB =
-          parseDateTime(b['date']! as String, b['time']! as String);
-      return dateB!.compareTo(dateA!);
-    });
-    // date and time ke hisIab se sort kar raha hai
-
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
@@ -46,13 +25,11 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
           leading: IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
-              // Navigate to Profile Screen
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => StudentProfilePage(
-                      student:
-                          dummyUser), // Replace with your ProfileScreen widget
+                  builder: (context) =>
+                      StudentProfilePage(student: widget.student),
                 ),
               );
             },
@@ -62,7 +39,7 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
               icon: const Icon(Icons.logout),
               color: const Color.fromARGB(255, 0, 0, 0),
               onPressed: () {
-                // Implement logout logic here
+                // TODO: Implement logout logic here
                 // For example, clear user session and navigate to login screen
               },
             ),
@@ -111,7 +88,8 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const QrGeneration(),
+                              builder: (context) =>
+                                  QrGeneration(student: widget.student),
                             ),
                           );
                         });
@@ -137,10 +115,10 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
                 child: SizedBox(
                   width: MediaQuery.sizeOf(context).width,
                   height: MediaQuery.sizeOf(context).width * 0.67,
-                  child: Expanded(child: Image.network(dummyUser.imageUrl)),
+                  child:
+                      Expanded(child: Image.network(widget.student.imageUrl)),
                 ),
               ),
-              //TODO: Replace dummy student with real.
               const SizedBox(height: 20),
               // Student logs section
               Container(
@@ -163,9 +141,9 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
                     mainAxisSpacing: 10,
                     childAspectRatio: 2.5,
                   ),
-                  itemCount: sortedLogs.length,
+                  itemCount: widget.student.logs.length,
                   itemBuilder: (context, index) {
-                    var log = sortedLogs[index];
+                    final log = widget.student.logs[index];
                     return Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -183,13 +161,13 @@ class StudentHomeScreenState extends State<StudentHomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${log['location']} ${log['id']}',
+                            '${log.location} ${log.id}',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text('${log['time']} ${log['date']}'),
+                          Text('${log.time} ${log.date}'),
                         ],
                       ),
                     );
