@@ -1,5 +1,10 @@
+import 'package:client/Models/proctor_profile.dart';
 import 'package:client/Models/student.dart';
+import 'package:client/Screens/proctor_home_screen.dart';
+import 'package:client/Screens/proctor_location_input.dart';
+import 'package:client/Screens/signup.dart';
 import 'package:client/Screens/student_home_screen.dart';
+import 'package:client/Screens/student_profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,17 +13,23 @@ void main() {
 
 final Student dummyUser = Student(
   id: 1,
-  name: "John Doe",
+  name: "John Doe ksdbfuisdbvoiwhv",
   email: 'johndoe@example.com',
   dob: DateTime(1900),
   //TODO: Overflow  error handle not handled for long names, is it required?
-  department: "Student Department",
-  course: "computer science Engineering",
   year: 2,
   logs: [],
-  vehicles: ['Bicycle', 'Scooter'],
+  vehicles: ['Bicycle', 'Scooter - MP09DE1234'],
   imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSixEKfEcJhD3fau0Pr-zDTEXgn9r9V3pqa4g&s", // random image picked for now...
+);
+Proctor dummyProctor = Proctor(
+  name: 'John Doe',
+  email: '',
+  phone: '',
+  id: 1,
+  logs: [],
+  imgURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSixEKfEcJhD3fau0Pr-zDTEXgn9r9V3pqa4g&s",
 );
 
 class MyApp extends StatelessWidget {
@@ -48,7 +59,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: StudentHomeScreen(),
+      home:   StudentHomeScreen(student: dummyUser),
     );
   }
 }

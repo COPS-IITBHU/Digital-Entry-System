@@ -7,7 +7,7 @@ class SignUpPage extends StatefulWidget {
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
-  //TODO: Resolve this while setting up API 
+  //TODO: Resolve this while setting up API
 }
 
 class _SignUpPageState extends State<SignUpPage> {
@@ -25,6 +25,17 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
+  // final TextEditingController _emailController = TextEditingController();
+  // String? _validateEmail(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Please enter your email';
+  //   } else if (!value.endsWith('@itbhu.ac.in')||!value.endsWith('@iitbhu.ac.in')) {
+  //     return 'Email must end with "@itbhu.ac.in" or "@iitbhu.ac.in"';
+  //   }
+  //   return null;
+  // }
+  // thought ki ise use me leke I could make sure that the email is valid
+  //TODO: Implement the email validation
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,15 +69,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         const SizedBox(height: 10),
                         const CustomTextField(label: 'Roll Number'),
                         const SizedBox(height: 10),
-                        const CustomTextField(label: 'Department'),
+                        const CustomTextField(label: 'Year'),
                         const SizedBox(height: 10),
-                        const CustomTextField(label: 'Course'),
-                        const SizedBox(height: 10),
-                        const CustomTextField(label: 'Batch'),
+                        const CustomTextField(label: 'DOB'),
                         const SizedBox(height: 10),
                         const CustomTextField(label: 'Hostel'),
                         const SizedBox(height: 10),
-                        const CustomTextField(label: 'Institute E-Mail'),
+                        const CustomTextField(label: 'Institute Email'),
                         const SizedBox(height: 10),
 
                         // Image upload section
@@ -74,14 +83,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           onTap: _pickImage,
                           child: Container(
                             width: double.infinity,
-                            height: 200,
+                            height: 100,
                             decoration: BoxDecoration(
                               color: Colors.purple.shade100,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: _selectedImage != null
-                                ? Image.file(
-                                    _selectedImage!,
+                                ? Image.network(
+                                    _selectedImage!.path,
                                     fit: BoxFit.cover,
                                   )
                                 : const Center(
@@ -101,8 +110,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           onPressed: () {},
                           //TODO: Implement the add vehicle functionality
                           style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color(0xFFFAD02E), // Yellow button color
+                            backgroundColor: const Color.fromARGB(
+                                255, 46, 216, 250), // Yellow button color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),

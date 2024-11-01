@@ -2,6 +2,7 @@ import 'package:client/Models/logs.dart';
 import 'package:client/Widgets/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:client/main.dart';
 
 class ProctorHomeScreen extends StatefulWidget {
   const ProctorHomeScreen({super.key});
@@ -95,7 +96,6 @@ class ProctorHomeScreenState extends State<ProctorHomeScreen> {
                           );
                         });
                       },
-                      //TODO: Add the logic to Scan the QR .
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purple,
                         padding: const EdgeInsets.symmetric(
@@ -113,8 +113,13 @@ class ProctorHomeScreenState extends State<ProctorHomeScreen> {
                 ),
               ),
               // Central image section
-              const Expanded(child: Placeholder()),
-              //TODO: Add the ID of the proctor here;
+              Expanded(
+                child: SizedBox(
+                  width: MediaQuery.sizeOf(context).width,
+                  height: MediaQuery.sizeOf(context).width * 0.67,
+                  child: Expanded(child: Image.network(dummyProctor.imgURL)),
+                ),
+              ),
               const SizedBox(height: 20),
               // Student logs section
               Container(

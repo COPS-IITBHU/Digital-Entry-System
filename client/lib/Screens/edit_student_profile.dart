@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class EditProfilePage extends StatefulWidget {
   final Student student;
 
-  EditProfilePage({required this.student});
+  const EditProfilePage({super.key, required this.student});
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -51,11 +51,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
         backgroundColor: Colors.purple,
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: _saveProfile, // Save changes and navigate back
           ),
         ],
@@ -65,7 +65,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Vehicles',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
@@ -89,17 +89,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.remove_circle, color: Colors.red),
+                      icon: const Icon(Icons.remove_circle, color: Colors.red),
                       onPressed: () => _removeVehicle(index),
                     ),
                   ],
                 );
               },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _addVehicle,
-              child: Text('Add Vehicle'),
+              child: const Text('Add Vehicle'),
             ),
           ],
         ),
